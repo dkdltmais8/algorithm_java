@@ -1,0 +1,3 @@
+- import java.util.Scanner;
+  - 사용자에게 입력받기 위한 라이브러리
+- 
