@@ -7,39 +7,37 @@ public class Solve8_Ã¼À°º¹ {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] lost = {2,4};
-		int[] reserve = {1,3,5};
+		int[] reserve = {3};
 		solution(5,lost,reserve);
 	}
 	public static int solution(int n, int[] lost, int[] reserve) {
-        int answer = 0;
-        int[] student = new int[n];
+        int answer = n-lost.length;
+        Arrays.sort(lost);
+        Arrays.sort(reserve);
         for (int i=0;i<lost.length;i++)
         {
-        	student[lost[i]-1] = 0; 
-        }
-        for (int i=0;i<reserve.length;i++)
-        {
-        	student[reserve[i]-1] = 2;
-        }
-        System.out.println(Arrays.toString(student));
-        for (int i=0;i<student.length-1;i++)
-        {
-        	if (student[i]==2 && student[i+1]==0)
+        	for (int j=0;j<reserve.length;j++)
         	{
-        		student[i] = 1;
-        		student[i+1] =1;
+        		if (lost[i]==reserve[j])
+        		{
+        			lost[i]=reserve[j] = -1;
+        			answer++;
+        			break;
+        		}
         	}
         }
-        for (int i=student.length-1;i>0;i--)
+        for (int i=0;i<lost.length;i++)
         {
-        	if (student[i]==2 && student[i-1]==0)
+        	for (int j=0;j<reserve.length;j++)
         	{
-        		student[i] = 1;
-        		student[i-1] =1;
+        		if (lost[i]==reserve[j]-1 || lost[i]==reserve[j]+1 )
+        		{
+        			lost[i]=reserve[j] = -1;
+        			answer++;
+        			break;
+        		}
         	}
         }
-        
-        System.out.println(Arrays.toString(student));
         return answer;
     }
 }
